@@ -22,10 +22,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public GameScreen(BrickBreakerGame game) {
         this.game = game;
-    }
 
-    @Override
-    public void show() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
         stage = new Stage();
@@ -52,6 +49,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         }
 
         Gdx.input.setInputProcessor(this);
+    }
+
+    @Override
+    public void show() {
     }
 
 

@@ -11,6 +11,7 @@ public class Brick extends Actor {
     static final float HEIGHT = 40;
 
     private Rectangle bounds;
+    private Texture texture;
 
     public Brick(float x, float y) {
         setWidth(WIDTH);
@@ -19,11 +20,12 @@ public class Brick extends Actor {
         setY(y);
 
         bounds = new Rectangle(getX(), getY(), WIDTH, HEIGHT);
+        texture = new Texture("brick.png");
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(new Texture("brick.png"), getX(), getY(), getWidth(), getHeight());
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
     @Override

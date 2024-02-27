@@ -13,6 +13,7 @@ public class Paddle extends Actor {
     private static final float SPEED = 300f; // Velocidad de movimiento del paddle en píxeles por segundo
 
     private Rectangle bounds;
+    private Texture texture;
 
     public Paddle(float x, float y) {
         setWidth(WIDTH);
@@ -21,11 +22,12 @@ public class Paddle extends Actor {
         setY(y);
 
         bounds = new Rectangle(getX(), getY(), WIDTH, HEIGHT);
+        texture = new Texture("paddle.png");
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(new Texture("paddle.png"), getX(), getY(), getWidth(), getHeight());
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
     @Override

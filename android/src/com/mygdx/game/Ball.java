@@ -13,6 +13,7 @@ public class Ball extends Actor {
     private Rectangle bounds;
     private float velocityX;
     private float velocityY;
+    private Texture texture;
 
     public Ball(float x, float y) {
         setWidth(SIZE);
@@ -24,11 +25,12 @@ public class Ball extends Actor {
         // Inicializamos la velocidad de la bola
         velocityX = SPEED;
         velocityY = SPEED;
+        texture = new Texture("ball.png");
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(new Texture("ball.png"), getX(), getY(), getWidth(), getHeight());
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
     @Override

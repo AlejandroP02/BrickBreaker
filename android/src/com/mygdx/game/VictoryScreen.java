@@ -4,14 +4,29 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 
+/**
+ * La clase VictoryScreen representa la pantalla
+ * mostrada cuando el jugador gana el juego.
+ */
 public class VictoryScreen extends ScreenAdapter {
 
+    /**
+     * El juego al que pertenece la pantalla de victoria.
+     */
     private BrickBreakerGame game;
 
+    /**
+     * Constructor de la clase VictoryScreen.
+     * @param game La instancia del juego BrickBreakerGame.
+     */
     public VictoryScreen(BrickBreakerGame game) {
         this.game = game;
     }
 
+    /**
+     * Renderiza la pantalla de victoria.
+     * @param delta El tiempo transcurrido desde el último renderizado.
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);

@@ -4,14 +4,29 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 
+/**
+ * La clase GameOverScreen representa la pantalla
+ * mostrada cuando se pierde en el juego.
+ */
 public class GameOverScreen extends ScreenAdapter {
 
+    /**
+     * El juego al que pertenece la pantalla de Game Over.
+     */
     private BrickBreakerGame game;
 
+    /**
+     * Constructor de la clase GameOverScreen.
+     * @param game La instancia del juego BrickBreakerGame.
+     */
     public GameOverScreen(BrickBreakerGame game) {
         this.game = game;
     }
 
+    /**
+     * Renderiza la pantalla de Game Over.
+     * @param delta El tiempo transcurrido desde el último renderizado.
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -29,5 +44,4 @@ public class GameOverScreen extends ScreenAdapter {
             dispose();
         }
     }
-
 }

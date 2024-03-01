@@ -6,15 +6,41 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/**
+ * La clase Ball representa la pelota en el juego.
+ */
 public class Ball extends Actor {
+    /**
+     * Tamaño de la pelota.
+     */
     static final float SIZE = 40f;
-    private static final float SPEED = 300f; // Velocidad de la bola en píxeles por segundo
-
+    /**
+     * Velocidad de la bola en píxeles por segundo
+     */
+    private static final float SPEED = 500f;
+    /**
+     * Los límites de la pelota
+     */
     private Rectangle bounds;
+    /**
+     *
+     * La velocidad horizontal de la pelota.
+     */
     private float velocityX;
+    /**
+     * La velocidad vertical de la pelota.
+     */
     private float velocityY;
+    /**
+     * La textura de la pelota
+     */
     private Texture texture;
 
+    /**
+     * Constructor de la clase Ball.
+     * @param x La posición inicial en el eje x.
+     * @param y La posición inicial en el eje y.
+     */
     public Ball(float x, float y) {
         setWidth(SIZE);
         setHeight(SIZE);
@@ -28,11 +54,20 @@ public class Ball extends Actor {
         texture = new Texture("ball.png");
     }
 
+    /**
+     * Dibuja la pelota en el lote especificado.
+     * @param batch       El lote para dibujar.
+     * @param parentAlpha La transparencia del padre de la pelota.
+     */
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
+    /**
+     * Actualiza la posición de la pelota en función del tiempo transcurrido.
+     * @param delta El tiempo transcurrido desde el último acto.
+     */
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -62,11 +97,18 @@ public class Ball extends Actor {
 
     }
 
+    /**
+     * Obtiene los límites de la pelota.
+     * @return Los límites de la pelota.
+     */
     public Rectangle getBounds() {
         return bounds;
     }
 
-
+    /**
+     * Rebota la pelota fuera de un paddle.
+     * @param paddle El paddle con el que la pelota colisionó.
+     */
     public void bounceOffPaddle(Paddle paddle) {
         clear();
         // Calcular la posición de la pelota en el eje y antes de la colisión
@@ -94,10 +136,20 @@ public class Ball extends Actor {
         }
     }
 
+    /**
+     * Comprueba si la pelota colisiona con un ladrillo.
+     * @param brick El ladrillo con el que se comprueba la colisión.
+     * @return true si la pelota colisiona con el ladrillo, false en caso contrario.
+     */
     public boolean collidesWithBrick(Brick brick) {
         clear();
         return bounds.overlaps(brick.getBounds());
     }
+
+    /**
+     * Rebota la pelota fuera al tocar un ladrillo.
+     * @param brick El ladrillo con el que la pelota colisionó.
+     */
     public void bounceOffBrick(Brick brick) {
         clear();
         float overlapX = Math.min(getX() + getWidth(), brick.getX() + brick.getWidth()) - Math.max(getX(), brick.getX());
@@ -111,6 +163,5 @@ public class Ball extends Actor {
             velocityX *= -1;
         }
     }
-
 }
 

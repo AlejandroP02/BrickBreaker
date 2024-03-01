@@ -11,15 +11,40 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
+/**
+ * La clase GameScreen representa la pantalla
+ * principal del juego donde ocurre la acción del juego.
+ */
 public class GameScreen extends ScreenAdapter implements InputProcessor {
+    /**
+     * El juego.
+     */
     private BrickBreakerGame game;
+    /**
+     * El escenario.
+     */
     private Stage stage;
+    /**
+     * La paleta de control del jugador.
+     */
     private Paddle paddle;
+    /**
+     * La pelota.
+     */
     private Ball ball;
+    /**
+     * Los ladrillos.
+     */
     private Brick[][] bricks;
-
+    /**
+     * La cámara.
+     */
     OrthographicCamera camera;
 
+    /**
+     * Constructor de la clase GameScreen.
+     * @param game La instancia de BrickBreakerGame.
+     */
     public GameScreen(BrickBreakerGame game) {
         this.game = game;
 
@@ -55,7 +80,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void show() {
     }
 
-
+    /**
+     * Renderiza la pantalla del juego.
+     * @param delta El tiempo transcurrido
+     *             desde el último fotograma.
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -95,6 +124,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         }
     }
 
+    /**
+     * Verifica si todos los ladrillos han sido destruidos.
+     * @return true si todos los ladrillos han sido destruidos,
+     * false en caso contrario.
+     */
     private boolean allBricksDestroyed() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
@@ -147,6 +181,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return false;
     }
 
+
+    /**
+     * Se llama cuando se arrastra el dedo sobre la pantalla.
+     * @param screenX La coordenada X de la posición del puntero.
+     * @param screenY La coordenada Y de la posición del puntero.
+     * @param pointer El índice del puntero.
+     * @return true si se procesó el evento, false de lo contrario.
+     */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         float touchX = stage.getViewport().unproject(new Vector3(screenX, screenY, 0)).x;

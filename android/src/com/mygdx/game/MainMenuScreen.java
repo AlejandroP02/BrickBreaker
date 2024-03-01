@@ -14,17 +14,42 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+/**
+ * La clase MainMenuScreen representa la pantalla principal del juego.
+ * Esta pantalla muestra un botón para iniciar el juego.
+ */
 public class MainMenuScreen extends ScreenAdapter {
 
+    /**
+     * Referencia al juego principal.
+     */
     private BrickBreakerGame game;
+    /**
+     * Escenario para mostrar los elementos de la pantalla.
+     */
     private Stage stage;
+    /**
+     * Cámara para la vista ortográfica.
+     */
     private OrthographicCamera camera;
+    /**
+     * Renderizador para dibujar formas geométricas en la pantalla.
+     */
     private ShapeRenderer shapeRenderer;
 
+    /**
+     * Constructor para crear una instancia de MainMenuScreen.
+     * @param game El juego al que pertenece esta pantalla.
+     */
     public MainMenuScreen(BrickBreakerGame game) {
         this.game = game;
     }
 
+    /**
+     * Se llama cuando esta pantalla se muestra.
+     * Configura la cámara, el escenario y el renderizador de formas.
+     * Crea y agrega un botón de reproducción al escenario.
+     */
     @Override
     public void show() {
         camera = new OrthographicCamera();
@@ -55,6 +80,11 @@ public class MainMenuScreen extends ScreenAdapter {
         stage.addActor(playButton);
     }
 
+    /**
+     * Se llama para renderizar la pantalla.
+     * Limpia el color de la pantalla y dibuja
+     * el botón de reproducción y el fondo.
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
@@ -70,11 +100,21 @@ public class MainMenuScreen extends ScreenAdapter {
         stage.draw();
     }
 
+    /**
+     * Se llama cuando la ventana cambia de tamaño.
+     * Actualiza el viewport del escenario para
+     * adaptarse al nuevo tamaño de la ventana.
+     */
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
+    /**
+     * Se llama cuando esta pantalla deja de mostrarse.
+     * Libera los recursos utilizados por el escenario
+     * y el renderizador de formas.
+     */
     @Override
     public void hide() {
         stage.dispose();

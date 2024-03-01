@@ -112,7 +112,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         ball.act(delta);
 
 
-        if (ball.getY() <= 0) {
+        if (ball.getY() <= 40) {
             game.setScreen(new GameOverScreen(game));
             dispose();
         } else if(allBricksDestroyed()) {

@@ -17,7 +17,7 @@ public class Ball extends Actor {
     /**
      * Velocidad de la bola en píxeles por segundo
      */
-    private static final float SPEED = 500f;
+    private static final float SPEED = 750f;
     /**
      * Los límites de la pelota
      */

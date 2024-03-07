@@ -5,6 +5,8 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -36,6 +38,10 @@ public class MainMenuScreen extends ScreenAdapter {
      * Renderizador para dibujar formas geométricas en la pantalla.
      */
     private ShapeRenderer shapeRenderer;
+    /**
+     * Fuente del juego.
+     */
+    BitmapFont bigFont;
 
     /**
      * Constructor para crear una instancia de MainMenuScreen.
@@ -61,8 +67,17 @@ public class MainMenuScreen extends ScreenAdapter {
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setAutoShapeType(true);
 
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("8bitOperatorPlus-Bold.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params.borderColor = Color.BLACK;
+        params.color = Color.WHITE;
+        params.size = 50;
+        params.borderWidth = 5;
+        bigFont = generator.generateFont(params);
+        generator.dispose();
+
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
-        buttonStyle.font = game.font;
+        buttonStyle.font = bigFont;
         buttonStyle.fontColor = Color.WHITE;
 
         TextButton playButton = new TextButton("PLAY", buttonStyle);

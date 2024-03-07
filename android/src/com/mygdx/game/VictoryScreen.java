@@ -2,7 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 /**
  * La clase VictoryScreen representa la pantalla
@@ -14,6 +17,10 @@ public class VictoryScreen extends ScreenAdapter {
      * El juego al que pertenece la pantalla de victoria.
      */
     private BrickBreakerGame game;
+    /**
+     * Fuente del juego.
+     */
+    private BitmapFont bigFont;
 
     /**
      * Constructor de la clase VictoryScreen.
@@ -21,6 +28,14 @@ public class VictoryScreen extends ScreenAdapter {
      */
     public VictoryScreen(BrickBreakerGame game) {
         this.game = game;
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("8bitOperatorPlus-Bold.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params.borderColor = Color.BLACK;
+        params.color = Color.WHITE;
+        params.size = 50;
+        params.borderWidth = 5;
+        bigFont = generator.generateFont(params);
+        generator.dispose();
     }
 
     /**

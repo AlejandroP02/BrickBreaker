@@ -3,8 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,6 +24,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
      * El juego.
      */
     private BrickBreakerGame game;
+    /**
+     * Vidas que tiene el jugador.
+     */
+    private int vidas;
+    /**
+     * Fuente del juego.
+     */
+    private BitmapFont bigFont;
     /**
      * El escenario.
      */
@@ -48,6 +60,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public GameScreen(BrickBreakerGame game) {
         this.game = game;
 
+        vidas=3;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
         stage = new Stage();
@@ -65,6 +78,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         }
 
 
+
         stage.addActor(paddle);
         stage.addActor(ball);
         for (int row = 0; row < 10; row++) {
@@ -72,6 +86,15 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
                 stage.addActor(bricks[row][col]);
             }
         }
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("8bitOperatorPlus-Bold.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params.borderColor = Color.BLACK;
+        params.color = Color.WHITE;
+        params.size = 50;
+        params.borderWidth = 5;
+        bigFont = generator.generateFont(params);
+        generator.dispose();
 
         Gdx.input.setInputProcessor(this);
     }
@@ -113,14 +136,21 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
 
         if (ball.getY() <= 40) {
-            game.setScreen(new GameOverScreen(game));
-            dispose();
+            if (vidas>0){
+                vidas--;
+                ball.setPosition(paddle.getX() + (Paddle.WIDTH - Ball.SIZE) / 2, paddle.getY() + Paddle.HEIGHT);
+            }else {
+                game.setScreen(new GameOverScreen(game));
+            }
         } else if(allBricksDestroyed()) {
             game.setScreen(new VictoryScreen(game));
             dispose();
         } else {
             stage.act(delta);
             stage.draw();
+            game.batch.begin();
+            bigFont.draw(game.batch, "Vidas: " + vidas, 50, 50);
+            game.batch.end();
         }
     }
 
